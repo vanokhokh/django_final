@@ -1,10 +1,35 @@
+body { background-color: #F5F5F5; }
 
-/* for main title */
+.nav_main { background-color: #1F4456; }
+
+.nav-link {
+  transition: all 0.3s ease;
+  background-color: #F5F5F5;
+}
+
+.nav-link:hover {
+  transform: scale(1.1);
+  color: #C7370F !important;
+}
+.or_color { color: #C7370F !important;}
+
+/* end of body and navbar */
+
+.card {
+    transition: all 0.3s ease;
+}
+.card:hover {
+    transform: scale(1.05);
+     box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.5);
+}
+
+
 .main_title{
     text-align: center;
     position: relative;
     font-weight: 600;
 }
+
 .main_title::before,
 .main_title::after{
     content: '';
@@ -12,7 +37,7 @@
     top: 50%;
     width: 35%;
     height: 2px;
-    background: #000;
+    background: #C7370F;
 }
 .main_title::before{
     left: 0;
@@ -20,6 +45,8 @@
 .main_title::after{
     right: 0;
 }
+
+
 .main_photo{
     background-image: url("/static/images/background-image4.jpg");
     background-size: cover;
@@ -33,3 +60,27 @@
     text-shadow: 8px 10px 4px rgba(0,0,0,0.9);
 }
 
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+}
+.table thead {
+  background-color: #343a40;
+  color: white;
+}
+.table tbody tr:hover {
+  background-color: #f9e4c9;
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+
+.footer {
+  background-color: #1F4456;
+  color: #C7370F !important;
+}

@@ -7,7 +7,7 @@
                 <img src="{{ hotel.hotel_image.url }}" class="hotel_image w-100 h-100" alt="courtyard marriott">
             </div>
             <div class="col-4 text-center align-content-center">
-                <h1> {{ hotel.hotel_name }}</h1>
+                <h1 class="or_color"> {{ hotel.hotel_name }}</h1>
                 <p>Address: {{ hotel.hotel_address }}</p>
                 <p>Star: {{ hotel.hotel_star }}</p>
                 <p>Contact: {{ hotel.hotel_contact }}</p>
@@ -43,14 +43,14 @@
             </div>
         </div>
         <div class="row text-center mt-5">
-            <h2>About {{ hotel.hotel_name }}</h2>
+            <h2 class="or_color">About {{ hotel.hotel_name }}</h2>
             <hr>
             <p>About: {{ hotel.hotel_about }}</p>
         </div>
     </div>
     <div class="container border-top border-dark">
        <div class="row justify-content-center g-4">
-           <h2 class="text-center mb-5 mt-5 main_title">Hotel Rooms</h2>
+           <h2 class="text-center mb-5 mt-5 main_title or_color">Hotel Rooms</h2>
            {% for room in rooms %}
                <div class="col-3">
                    <div class="card border-dark" style="width: 18rem;">

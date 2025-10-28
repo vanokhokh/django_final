@@ -8,7 +8,7 @@
                     {% csrf_token %}
                     {{ form.non_field_errors }}
                     {% if room %}
-                        <h2>Book Room: {{ room.room_type }} Of hotel {{ room.hotel.hotel_name }}</h2>
+                    <h2 class="text-center">Book Room: <span class="or_color">{{ room.room_type }}</span> Of Hotel <span class="or_color">{{ room.hotel.hotel_name }}</span></h2>
                         <input type="hidden" name="room" value="{{ room.id }}">
                         <input type="hidden" name="hotel" value="{{ hotel.id }}">
 
@@ -27,9 +27,12 @@
                         {{ form.guests|as_crispy_field }}
                     </div>
                     {% else %}
+                    <h2 class="or_color text-center">Book Room</h2>
                         {{ form|crispy }}
                     {% endif %}
-                    <button type="submit" class="btn btn-success mt-3">Booking</button>
+                    <div class="d-flex justify-content-center ">
+                        <button type="submit" class="btn btn-success mt-3">Booking</button>
+                    </div>
                 </form>
             </div>
         </div>
