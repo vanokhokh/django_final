@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% if room %}
+                        <h2>Book Room: {{ room.room_type }} Of hotel {{ room.hotel.hotel_name }}</h2>
+                        <input type="hidden" name="room" value="{{ room.id }}">
+                        <input type="hidden" name="hotel" value="{{ hotel.id }}">
+
+                        <div class="form-group">
+                            <label for="hotel_label">Hotel:</label>
+                            <input type="text" class="form-control" id="hotel_label" value="{{ room.hotel.hotel_name }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="room_label">Room:</label>
+                            <input type="text" id="room_label" class="form-control" value="{{ room.room_type }}" readonly>
+                        </div>
+
+                        <div class="checkin_box">
+                        {{ form.check_in|as_crispy_field }}
+                        {{ form.check_out|as_crispy_field }}
+                        {{ form.guests|as_crispy_field }}
+                    </div>
+                    {% else %}
+                        {{ form|crispy }}
+                    {% endif %}
+                    <button type="submit" class="btn btn-success mt-3">Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#id_hotel').change(function() {
+                var hotelId = $(this).val();
+                $.ajax({
+                    url: "{% url 'hotel_app:hotel_rooms' %}",
+                    data: {'hotel_id': hotelId},
+                    success: function(data) {
+                        $('#id_room').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

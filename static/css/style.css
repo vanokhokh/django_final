@@ -1,0 +1,35 @@
+
+/* for main title */
+.main_title{
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+}
+.main_title::before,
+.main_title::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 2px;
+    background: #000;
+}
+.main_title::before{
+    left: 0;
+}
+.main_title::after{
+    right: 0;
+}
+.main_photo{
+    background-image: url("/static/images/background-image4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+}
+.logo_title{
+    text-shadow: 8px 10px 4px rgba(0,0,0,0.9);
+}
+

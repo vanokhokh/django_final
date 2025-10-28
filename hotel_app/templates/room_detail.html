@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} main page {% endblock %}
+{% block body %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4"> - Room {{ room.room_type }} - Of {{ room.hotel.hotel_name }}</h2>
+        <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade mx-auto w-75" data-bs-ride="carousel" style="height: 400px;">
+                <div class="carousel-indicators">
+                    {% for image in images %}
+                        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"
+                                aria-current="{% if forloop.first %}true{% endif %}" aria-label="Slide {{ forloop.counter }}">
+                        </button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner h-100">
+                    {% for image in images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %} h-100">
+                            <img src="{{ image.images.url }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Room Image">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-center gap-4">
+                <p class="fs-5"><strong> Room Number:</strong> {{ room.room_number }}</p>
+                <p class="fs-5"><strong> Price:</strong> {{ room.room_price }}$</p>
+                <p class="fs-5"><strong> Availability:</strong> {{ room.room_available|yesno:"Available,Not Available" }}</p>
+            </div>
+            <div class="d-flex justify-content-center ">
+                <a href="{% url 'hotel_app:booking' room_id=room.pk %}" class="btn btn-success fs-5 mb-5 mt-3">Book this room</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

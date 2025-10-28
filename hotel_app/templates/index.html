@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} main page {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="main_photo">
+                <h1 class="text-white fw-bold p-5 logo_title">Five-Star Hotels</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="row justify-content-center g-4">
+            <h1 class="text-center mb-5 mt-5 main_title">Favorite Rooms</h1>
+            {% for room in favorite_rooms %}
+                <div class="col-3">
+                    <div class="card border-dark" style="width: 18rem;">
+                        <img src="{{ room.room_image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Room Type: {{ room.room_type }}</h5>
+                            <p class="card-text">Hotel: {{ room.hotel.hotel_name }}</p>
+                            <p class="card-text">Price: {{ room.room_price }}$</p>
+                            <p class="card-text">Room Number: {{ room.room_number }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'hotel_app:room_detail' pk=room.pk %}" class="btn btn-primary">See Room</a>
+                                <a href="{% url 'hotel_app:booking' room_id=room.pk %}" class="btn btn-success">book room</a>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+           {% endfor %}
+        </div>
+    </div>
+{% endblock %}

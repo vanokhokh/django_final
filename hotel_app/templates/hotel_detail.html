@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %} main page {% endblock %}
+{% block body %}
+    <div class="container mt-3">
+        <div class="row mb-5 border-bottom border-dark pb-5">
+            <div class="col-8">
+                <img src="{{ hotel.hotel_image.url }}" class="hotel_image w-100 h-100" alt="courtyard marriott">
+            </div>
+            <div class="col-4 text-center align-content-center">
+                <h1> {{ hotel.hotel_name }}</h1>
+                <p>Address: {{ hotel.hotel_address }}</p>
+                <p>Star: {{ hotel.hotel_star }}</p>
+                <p>Contact: {{ hotel.hotel_contact }}</p>
+                <p>Email: {{ hotel.hotel_email }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade mx-auto w-75" data-bs-ride="carousel" style="height: 400px;">
+                    <div class="carousel-indicators">
+                        {% for image in images %}
+                            <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"
+                                    aria-current="{% if forloop.first %}true{% endif %}" aria-label="Slide {{ forloop.counter }}">
+                            </button>
+                        {% endfor %}
+                    </div>
+                    <div class="carousel-inner h-100">
+                        {% for image in images %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %} h-100">
+                                <img src="{{ image.images.url }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Hotel Image">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <h2>About {{ hotel.hotel_name }}</h2>
+            <hr>
+            <p>About: {{ hotel.hotel_about }}</p>
+        </div>
+    </div>
+    <div class="container border-top border-dark">
+       <div class="row justify-content-center g-4">
+           <h2 class="text-center mb-5 mt-5 main_title">Hotel Rooms</h2>
+           {% for room in rooms %}
+               <div class="col-3">
+                   <div class="card border-dark" style="width: 18rem;">
+                       <img src="{{ room.room_image.url }}" class="card-img-top" alt="...">
+                       <div class="card-body">
+                           <h5 class="card-title">Room Type: {{ room.room_type }}</h5>
+                           <p class="card-text">Price: {{ room.room_price }}$</p>
+                           <p class="card-text">Room Number: {{ room.room_number }}</p>
+                           <div class="d-flex justify-content-between">
+                               <a href="{% url 'hotel_app:room_detail' pk=room.pk %}" class="btn btn-primary">See Room</a>
+                               <a href="{% url 'hotel_app:booking' room_id=room.pk %}" class="btn btn-success">Book Room</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           {% endfor %}
+       </div>
+    </div>
+{% endblock %}

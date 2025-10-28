@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} All Rooms {% endblock %}
+{% block body %}
+   <div class="container">
+       <div class="row">
+           <div class="col-12 mt-3 align-items-center border-bottom border-top rounded-4 border-dark  p-3">
+               <form action="{% url 'hotel_app:all_rooms' %}" class="d-flex gap-2">
+                   <input type="number" class="form-control border-dark" name="min_price" placeholder="min. price" value="{{ request.GET.min_price }}">
+                   <input type="number" class="form-control border-dark" name="max_price" placeholder="max. price" value="{{ request.GET.max_price }}">
+                   <input type="text" class="form-control border-dark" name="room_type" placeholder="room type" value="{{ request.GET.room_type }}">
+                   <input type="text" class="form-control border-dark" name="hotel_name" placeholder="hotel name" value="{{ request.GET.hotel_name }}">
+                   <input type="date" class="form-control border-dark" name="check_in" placeholder="check-in" value="{{ request.GET.check_in }}">
+                   <input type="date" class="form-control border-dark" name="check_out" placeholder="check-out" value="{{ request.GET.check_out }}">
+                   <button type="submit" class="btn btn-warning ">Filter</button>
+               </form>
+           </div>
+       </div>
+       <div class="row justify-content-center g-4">
+           <h1 class="text-center mb-5 mt-5 main_title">All Rooms</h1>
+           {% for room in rooms %}
+               <div class="col-3 mt-3">
+                   <div class="card border-dark" style="width: 18rem;">
+                       <img src="{{ room.room_image.url }}" class="card-img-top" alt="...">
+                       <div class="card-body">
+                           <h5 class="card-title">Room Type: {{ room.room_type }}</h5>
+                           <p class="card-title">Hotel: {{ room.hotel.hotel_name }}</p>
+                           <p class="card-title">Room Number: {{ room.room_number }}</p>
+                           <p class="card-title">Room Price: {{ room.room_price }}$</p>
+                           <div class="d-flex justify-content-between pt-2">
+                               <a href="{% url 'hotel_app:room_detail' pk=room.pk %}" class="btn btn-primary">See Room</a>
+                               <a href="{% url 'hotel_app:booking' room_id=room.pk %}" class="btn btn-success">Book Room</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           {% endfor %}
+       </div>
+   </div>
+{% endblock %}
